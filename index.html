@@ -43,8 +43,15 @@
     <meta name="cf-no-email-protection" content="true">
 
     <style>
+        @font-face {
+            font-family: "Nimbus Sans L";
+            src: url("./NimbusSansL-Reg.woff2") format("woff2");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
-            --site-font: "Nimbus Sans L", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
             --edge-x: 2rem;
             --edge-y: 2rem;
             --sound-bottom: 24px;
@@ -55,7 +62,7 @@
         html, body {
             width: 100%; height: 100%; overflow: hidden;
             background: #000;
-            font-family: var(--site-font);
+            font-family: "Nimbus Sans L";
             font-size: 10px;
             color: #c2c2c2;
             text-transform: uppercase;
@@ -67,7 +74,7 @@
         canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
 
         body, body * {
-            font-family: var(--site-font);
+            font-family: "Nimbus Sans L";
         }
 
         a, button {
@@ -335,7 +342,7 @@
         let mx = 0, my = 0, cursorInfluence = 0;
 
         /* Audio engine state (Tone.js) */
-        let audioReady = false, targetPlaying = false, ringMix = 0;
+        let audioReady = false, targetPlaying = false, soundBusy = false, ringMix = 0;
         let brownNoise = null, whiteNoise = null, pinkNoise = null;
         let brownGain  = null, whiteGain  = null, pinkGain  = null;
         let filterNode = null, masterGain = null;
@@ -676,37 +683,48 @@
         });
 
         soundBtn.addEventListener("click", async () => {
-            if (!targetPlaying) {
-                if (!audioReady) await initAudio();
-                if (Tone.context.state === "suspended") {
-                    await Tone.context.rawContext.resume();
+            if (soundBusy) return;
+            soundBusy = true;
+
+            try {
+                if (!targetPlaying) {
+                    if (!audioReady) await initAudio();
+                    if (Tone.context.state === "suspended") {
+                        await Tone.context.rawContext.resume();
+                    }
+                    await new Promise(r => setTimeout(r, 60));
+
+                    startNoises();
+
+                    const now = Tone.now();
+                    filterNode.frequency.setValueAtTime(DEFAULT_FREQ, now);
+                    masterGain.gain.setValueAtTime(0, now);
+                    brownGain.gain.setValueAtTime(0, now);
+                    whiteGain.gain.setValueAtTime(0, now);
+                    pinkGain.gain.setValueAtTime(0, now);
+
+                    ringProximity = 0;
+                    targetFreq    = DEFAULT_FREQ;
+                    targetBrown   = DEFAULT_BROWN;
+                    targetWhite   = DEFAULT_WHITE;
+                    targetPink    = DEFAULT_PINK;
+
+                    masterGain.gain.rampTo(0.12, 1.6);
+                    brownGain.gain.rampTo(DEFAULT_BROWN, 1.6);
+
+                    targetPlaying = true;
+                    setSoundActive(true);
+                } else {
+                    await stopAudio();
+                    resetFreeField();
+                    setSoundActive(false);
                 }
-                await new Promise(r => setTimeout(r, 60));
-
-                startNoises();
-
-                const now = Tone.now();
-                filterNode.frequency.setValueAtTime(DEFAULT_FREQ, now);
-                masterGain.gain.setValueAtTime(0, now);
-                brownGain.gain.setValueAtTime(0, now);
-                whiteGain.gain.setValueAtTime(0, now);
-                pinkGain.gain.setValueAtTime(0, now);
-
-                ringProximity = 0;
-                targetFreq    = DEFAULT_FREQ;
-                targetBrown   = DEFAULT_BROWN;
-                targetWhite   = DEFAULT_WHITE;
-                targetPink    = DEFAULT_PINK;
-
-                masterGain.gain.rampTo(0.12, 1.6);
-                brownGain.gain.rampTo(DEFAULT_BROWN, 1.6);
-
-                targetPlaying = true;
-                setSoundActive(true);
-            } else {
+            } catch (_) {
                 await stopAudio();
                 resetFreeField();
                 setSoundActive(false);
+            } finally {
+                soundBusy = false;
             }
         });
 
@@ -720,7 +738,11 @@
                 }
             });
             window.addEventListener("pagehide", () => {
-                if (targetPlaying) stopAudio();
+                if (targetPlaying) {
+                    stopAudio().catch(() => {});
+                    resetFreeField();
+                    setSoundActive(false);
+                }
             });
         }
 
