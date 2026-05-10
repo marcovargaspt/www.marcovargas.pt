@@ -43,19 +43,32 @@
     <meta name="cf-no-email-protection" content="true">
 
     <style>
+        :root {
+            --site-font: "Nimbus Sans L", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+            --edge-x: 2rem;
+            --edge-y: 2rem;
+            --sound-bottom: 24px;
+        }
+
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body {
             width: 100%; height: 100%; overflow: hidden;
             background: #000;
-            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Arial, sans-serif;
+            font-family: var(--site-font);
             font-size: 10px;
             color: #c2c2c2;
             text-transform: uppercase;
             cursor: none;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
 
         canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+
+        body, body * {
+            font-family: var(--site-font);
+        }
 
         a, button {
             color: inherit;
@@ -90,7 +103,8 @@
 
         .corner {
             position: fixed;
-            top: 2rem;
+            top: var(--edge-y);
+            top: max(var(--edge-y), calc(env(safe-area-inset-top) + var(--edge-y)));
             z-index: 100;
             font-size: 10px;
             line-height: 1.6;
@@ -98,12 +112,14 @@
         }
 
         #topLeft {
-            left: 2rem;
+            left: var(--edge-x);
+            left: max(var(--edge-x), calc(env(safe-area-inset-left) + var(--edge-x)));
             max-width: 280px;
         }
 
         #topRight {
-            right: 2rem;
+            right: var(--edge-x);
+            right: max(var(--edge-x), calc(env(safe-area-inset-right) + var(--edge-x)));
             max-width: 220px;
             text-align: right;
         }
@@ -140,7 +156,8 @@
         #soundDock {
             position: fixed;
             left: 50%;
-            bottom: 24px;
+            bottom: var(--sound-bottom);
+            bottom: max(var(--sound-bottom), calc(env(safe-area-inset-bottom) + var(--sound-bottom)));
             transform: translateX(-50%);
             z-index: 100;
             text-align: center;
@@ -149,6 +166,13 @@
         #soundBtn {
             width: 18px;
             height: 18px;
+            min-width: 18px;
+            min-height: 18px;
+            max-width: 18px;
+            max-height: 18px;
+            aspect-ratio: 1 / 1;
+            flex: 0 0 18px;
+            padding: 0;
             border: 1px solid #c2c2c2;
             border-radius: 50%;
             background: transparent;
@@ -184,23 +208,24 @@
         #cursorDot::after  { width: 100%; height: 1px; top: 50%; left: 0; transform: translateY(-50%); }
 
         @media (max-width: 768px) {
+            :root {
+                --edge-x: 1.8rem;
+                --edge-y: 1.55rem;
+                --sound-bottom: 20px;
+            }
             html, body { font-size: 9px; }
             .corner {
-                top: 1.25rem;
                 font-size: 9px;
             }
             #topLeft {
-                left: 1.25rem;
                 max-width: min(46vw, 240px);
             }
             #topRight {
-                right: 1.25rem;
                 max-width: min(42vw, 220px);
             }
             #aboutText {
                 max-width: min(46vw, 240px);
             }
-            #soundDock { bottom: 20px; }
         }
 
         @media (hover: none), (pointer: coarse) {
