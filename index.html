@@ -29,6 +29,14 @@
   </script>
 
   <style>
+    @font-face {
+      font-family: "Nimbus Sans L";
+      src: url("NimbusSansL-Reg.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -44,7 +52,7 @@
     body {
       background: #fff;
       color: #000;
-      font-family: "Microsoft Sans Serif", sans-serif;
+      font-family: "Nimbus Sans L", sans-serif;
       font-size: 10px;
       line-height: 1.3;
       font-weight: 400;
@@ -57,18 +65,15 @@
       left: 10vh;
     }
 
-    .name-row {
+    .name-row,
+    .role-line {
       margin-bottom: 1.1em;
     }
 
     .name,
-    .role-inline,
+    .role-line,
     .email {
       letter-spacing: 0.06em;
-    }
-
-    .name {
-      text-transform: uppercase;
     }
 
     a {
@@ -107,9 +112,8 @@
 
 <body>
   <div class="content">
-    <div class="name-row">
-      <span class="name">MARCO VARGAS</span><span class="role-inline">, Architect</span>
-    </div>
+    <div class="name-row">Marco Vargas</div>
+    <div class="role-line">Architect</div>
 
     <div class="email">
       <a href="mailto:mail@marcovargas.pt">mail@marcovargas.pt</a>
