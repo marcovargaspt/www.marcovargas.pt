@@ -3,20 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Marco Vargas</title>
   <meta name="description" content="Marco Vargas is an architect based in Portugal." />
   <meta name="keywords" content="Marco Vargas, arquitecto, arquitectura, architect, architecture, Portugal, Villa Mater: a house in Azores, FAUP." />
   <meta name="author" content="Marco Vargas" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.marcovargas.pt/" />
-
   <meta property="og:type" content="profile" />
   <meta property="og:title" content="Marco Vargas" />
   <meta property="og:description" content="Marco Vargas is an architect based in Portugal." />
   <meta property="og:url" content="https://www.marcovargas.pt/" />
   <meta property="og:locale" content="pt_PT" />
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,23 +21,21 @@
     "name": "Marco Vargas",
     "jobTitle": "Architect",
     "url": "https://www.marcovargas.pt",
-    "email": "mail@marcovargas.pt"
+    "email": "mail@marcovargas.pt",
+    "sameAs": ["https://www.instagram.com/marcovargas"]
   }
   </script>
-
   <style>
     @font-face {
-      font-family: "Nimbus Roman No9 L";
-      src: url("./NimbusRomNo9L-Reg.woff2") format("woff2");
-      font-weight: 400;
+      font-family: "Nimbus Sans L";
+      src: url("./NimbusSanL-Bol.woff2") format("woff2");
+      font-weight: 700;
       font-style: normal;
       font-display: swap;
     }
-
     * {
       box-sizing: border-box;
     }
-
     html,
     body {
       width: 100%;
@@ -48,50 +43,44 @@
       margin: 0;
       padding: 0;
     }
-
     body {
-      background: #fff;
-      color: #000;
-      font-family: "Nimbus Roman No9 L", serif;
+      background: #0d0d0d; /* preto a 95% - nao puro */
+      color: #f2f2f2; /* branco a 95% - nao puro */
+      font-family: "Nimbus Sans L", sans-serif;
+      font-weight: 700;
       font-size: 15px;
       line-height: 1.3;
-      font-weight: 400;
       -webkit-font-smoothing: antialiased;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
     }
-
     .content {
-      position: fixed;
-      top: 10vh;
-      left: 10vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
-
     .name-row {
-      margin-bottom: 0.45em;
+      margin-bottom: 1.6em;
     }
-
-    .email {
-      position: fixed;
-      left: 10vh;
-      bottom: 10vh;
+    .role-line {
+      margin-bottom: 1.6em;
     }
-
     .name-row,
     .role-line,
     .email {
       letter-spacing: 0.03em;
     }
-
     a {
       color: inherit;
       text-decoration: none;
     }
-
     a:hover,
     a:focus-visible {
       text-decoration: underline;
       text-underline-offset: 3px;
     }
-
     .seo-context {
       position: absolute;
       width: 1px;
@@ -104,33 +93,22 @@
       clip: rect(0 0 0 0);
       clip-path: inset(50%);
     }
-
     @media (max-width: 600px) {
       .content {
-        top: 8vw;
-        left: 8vw;
-        right: 8vw;
-      }
-
-      .email {
-        left: 8vw;
-        right: 8vw;
-        bottom: 8vw;
+        padding: 0 8vw;
       }
     }
   </style>
 </head>
-
 <body>
   <div class="content">
-    <div class="name-row">Marco Vargas</div>
+    <div class="name-row">MARCO VARGAS</div>
     <div class="role-line">Architect</div>
+    <div class="email">
+      <a href="mailto:mail@marcovargas.pt">mail@marcovargas.pt</a><br />
+      <a href="https://www.instagram.com/marcovargas" target="_blank" rel="noopener">@marcovargas</a>
+    </div>
   </div>
-
-  <div class="email">
-    <a href="mailto:mail@marcovargas.pt">mail@marcovargas.pt</a>
-  </div>
-
   <div class="seo-context">
     Marco Vargas is an architect based in Portugal. His work includes Villa Mater: a House in Azores.
   </div>
