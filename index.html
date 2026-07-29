@@ -43,28 +43,32 @@
       padding: 0;
     }
     body {
-      background: #000000; /* quase branco puro */
-      color: #fcfcfc; /* quase preto puro */
+      background: #000000;
+      color: #fcfcfc;
       font-family: "Nimbus Sans L", sans-serif;
       font-weight: 400;
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: left;
+      position: relative;
     }
     .content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      position: fixed;
+      top: 10vh;
+      left: 10vh;
+      text-align: left;
+    }
+    .email {
+      position: fixed;
+      bottom: 10vh;
+      left: 10vh;
+      text-align: left;
     }
     .name-row {
       margin-bottom: 0;
     }
     .role-line {
-      margin-bottom: 1.6em;
+      margin-bottom: 0;
     }
     .name-row,
     .role-line,
@@ -93,12 +97,13 @@
       clip-path: inset(50%);
     }
     @media (max-width: 600px) {
-      body {
-        display: block;
-        font-size: 15px;
-      }
       .content {
-        padding: 8vw 8vw 0;
+        top: 8vw;
+        left: 8vw;
+      }
+      .email {
+        bottom: 8vw;
+        left: 8vw;
       }
     }
   </style>
@@ -107,9 +112,11 @@
   <div class="content">
     <div class="name-row">MARCO VARGAS</div>
     <div class="role-line">Architect</div>
-    <div class="email">
-      <a href="mailto:mail@marcovargas.pt">mail@marcovargas.pt</a>
-    </div>
+  </div>
+  <div class="email">
+    <a href="mailto:mail@marcovargas.pt">Email</a><br />
+    <a href="https://www.instagram.com/marcovargas" target="_blank" rel="noopener">Instagram</a><br />
+    <a href="https://www.x.com/marcoxvargas" target="_blank" rel="noopener">X</a>
   </div>
   <div class="seo-context">
     Marco Vargas is an architect based in Portugal. His work includes Villa Mater: a House in Azores.
