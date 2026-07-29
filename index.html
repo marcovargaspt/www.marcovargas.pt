@@ -43,7 +43,7 @@
       padding: 0;
     }
     html {
-      font-size: clamp(16px, 1.8vw, 30px);
+      font-size: clamp(14px, 1.5vw, 23px);
     }
     body {
       background: #000000;
@@ -56,14 +56,14 @@
     }
     .content {
       position: fixed;
-      top: 10vh;
-      left: 10vh;
+      top: max(24px, min(4vw, 80px));
+      left: max(24px, min(4vw, 80px));
       text-align: left;
     }
     .email {
       position: fixed;
-      bottom: 10vh;
-      left: 10vh;
+      bottom: max(24px, min(4vw, 80px));
+      left: max(24px, min(4vw, 80px));
       text-align: left;
     }
     .name-row {
@@ -100,12 +100,12 @@
     }
     @media (max-width: 600px) {
       .content {
-        top: 8vw;
-        left: 8vw;
+        top: max(24px, min(4vw, 80px));
+        left: max(24px, min(4vw, 80px));
       }
       .email {
-        bottom: 8vw;
-        left: 8vw;
+        bottom: max(24px, min(4vw, 80px));
+        left: max(24px, min(4vw, 80px));
       }
     }
   </style>
