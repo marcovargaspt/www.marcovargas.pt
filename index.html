@@ -42,7 +42,7 @@
       padding: 0;
     }
     html {
-      font-size: 16px;
+      font-size: 20px;
     }
     :root {
       --link-blue: #0645ea;
@@ -87,9 +87,6 @@
         margin-top: 0;
         margin-left: 300px;
         max-width: 700px;
-      }
-      .about-content {
-        margin-top: 0;
       }
     }
 
@@ -168,6 +165,13 @@
       border: 0;
       clip: rect(0 0 0 0);
       clip-path: inset(50%);
+    }
+
+    /* No desktop, o About fica alinhado com o topo do sidebar (sem espaço extra) */
+    @media (min-width: 900px) {
+      .about-content {
+        margin-top: 0;
+      }
     }
   </style>
 </head>
