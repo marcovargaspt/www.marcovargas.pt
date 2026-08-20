@@ -69,7 +69,7 @@
       flex-shrink: 0;
     }
     .main {
-      margin-top: 32px;
+      margin-top: 0;
     }
 
     @media (min-width: 900px) {
@@ -96,6 +96,14 @@
       margin-bottom: 0;
       letter-spacing: 0.03em;
     }
+    .name-row a {
+      color: #000000;
+    }
+    .name-row a:hover,
+    .name-row a:focus-visible,
+    .name-row a:active {
+      color: var(--link-blue);
+    }
     .contact-block {
       margin-top: 0;
     }
@@ -103,7 +111,7 @@
       display: block;
     }
     .nav {
-      margin-top: 24px;
+      margin-top: 48px;
     }
     .nav a {
       display: block;
@@ -134,6 +142,7 @@
     .about-content {
       display: none;
       text-align: left;
+      margin-top: 24px;
     }
     .about-content.open {
       display: block;
@@ -162,7 +171,7 @@
 <body>
   <div class="page">
     <div class="sidebar">
-      <div class="name-row">Marco Vargas</div>
+      <div class="name-row"><a href="#" id="home-link">Marco Vargas</a></div>
       <div class="role-line">Arquitecto</div>
       <div class="contact-block">
         <a href="tel:+351925624720">+351 925 624 720</a>
@@ -179,7 +188,6 @@
         <p>During his studies, he was awarded first prize in two competitions: GO! Architecture at AEFAUP and the Warsaw Under Construction Festival 8, during a curricular internship at BudCud studio in Krak&oacute;w.</p>
         <p>Between the conclusion of his Erasmus exchange and his return to FAUP, he took a hiatus from his studies and worked at Wrong Weather, a high-fashion concept store in Porto, a period that influenced his personal taste.</p>
         <p>He started his career at Ebejer Bonnici in Malta. There he collaborated on renovating an apartment in a historic London building, an 18th-century palazzo in Birkirkara and three residential houses in Naxxar.</p>
-        <p>He is currently employed at Caiano Morgado Arquitectos and is working on a collaborative project with the artist Ellen Nielsen.</p>
       </div>
     </div>
   </div>
@@ -191,11 +199,19 @@
   <script>
     var aboutLink = document.getElementById('about-link');
     var aboutContent = document.getElementById('about-content');
+    var homeLink = document.getElementById('home-link');
 
     aboutLink.addEventListener('click', function (e) {
       e.preventDefault();
       var isOpen = aboutContent.classList.toggle('open');
       aboutLink.classList.toggle('active', isOpen);
+    });
+
+    homeLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      aboutContent.classList.remove('open');
+      aboutLink.classList.remove('active');
+      window.scrollTo(0, 0);
     });
   </script>
 </body>
